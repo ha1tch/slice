@@ -84,6 +84,26 @@ Includes:
 - Full document reconstruction
 
 ---
+## Benchmarks
+Benchmarks can be generated using benchmarks.sh.
+Be aware that:
+- The shell script benchmark is very slow, you may want to disable it.
+- Before running benchmarks.sh you must run the prepare.sh script in ./bench, it creates sample input files and it ensures that the required python packages are installed.
+- The generated benchmark input files are about 160 Mb in size. They are in ./bench/sample_inputs,  you may want to delete them after running the benchmarks.
+
+If you don't have the time and inclination to run the benchmarks yourself, I included a set of results running on a Macbook Pro M1 (the original, late 2020 model). You can see them here:
+https://github.com/ha1tch/slice/tree/main/bench/results
+
+Some highlights from the aforementioned benchmark results:
+### Time vs. File Size
+
+![Time by File Size](https://raw.githubusercontent.com/ha1tch/slice/refs/heads/main/bench/results/plots/time_by_file_size.png)
+
+### Throughput Comparison
+
+![Throughput Comparison](https://raw.githubusercontent.com/ha1tch/slice/refs/heads/main/bench/results/plots/throughput_comparison.png)
+
+
 
 ## Structured Content Testing
 
