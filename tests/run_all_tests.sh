@@ -27,4 +27,10 @@ echo "==> Shell tests"
 cd "$SCRIPT_DIR/shell"
 bash test_slice.sh "$ROOT_DIR/slice"
 
+# Run C tests
+echo "==> C tests"
+cd "$SCRIPT_DIR/c"
+bash test_slice.sh
+cd ..
+
 echo "All tests passed."
