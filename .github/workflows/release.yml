@@ -5,6 +5,9 @@ on:
     types: [published]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required for uploading release assets
+
 jobs:
   build-go:
     name: Build Go Binaries
@@ -65,7 +68,26 @@ jobs:
           mkdir -p ../dist
           clang -O2 slice.c -o ../dist/slice-darwin-c
 
-      - name: Upload C binary
+      - name: Upload macOS C binary
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-c-linux:
+    name: Build C binary (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build C binary
+        working-directory: c
+        run: |
+          mkdir -p ../dist
+          gcc -O2 slice.c -o ../dist/slice-linux-c
+
+      - name: Upload Linux C binary
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*
