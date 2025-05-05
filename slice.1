@@ -1,0 +1,43 @@
+.TH SLICE 1 "May 2025" "slice 1.0" "User Commands"
+.SH NAME
+slice \- extract byte slices from a file with optional line trimming
+.SH SYNOPSIS
+.B slice
+[\-\-start OFFSET] [\-\-size BYTES] [\-\-file FILE] [\-\-full-lines-only]
+.SH DESCRIPTION
+.B slice
+is a command-line utility that extracts a specified byte range from a file. It can optionally remove truncated lines at the beginning and end of the slice.
+
+.SH OPTIONS
+.TP
+.B \-\-start OFFSET
+Byte offset to begin reading (0-based).
+.TP
+.B \-\-size BYTES
+Number of bytes to read.
+.TP
+.B \-\-file FILE
+File to extract from.
+.TP
+.B \-\-full-lines-only
+Remove truncated lines at the start and end of the slice.
+.TP
+.B \-\-help
+Display usage information.
+
+.SH EXAMPLES
+.TP
+Extract 2048 bytes starting from byte 4096:
+.B
+slice --start 4096 --size 2048 --file input.txt
+
+.TP
+Extract overlapping chunks for RAG use:
+.B
+slice --start 0 --size 2048 --file input.txt --full-lines-only
+
+.SH AUTHOR
+haitch@duck.com.
+
+.SH LICENSE
+MIT License. See project README for details.
