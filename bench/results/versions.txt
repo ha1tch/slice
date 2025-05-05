@@ -1,0 +1,19 @@
+Slice Benchmark Environment
+===========================
+Date: Mon May  5 03:55:03 -03 2025
+
+System Information:
+-------------------
+Darwin haitchmac.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:16:51 PDT 2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T8103 arm64
+OS: Darwin
+Kernel: 23.5.0
+Architecture: arm64
+Memory: 8.00 GB
+
+Toolchain Versions:
+-------------------
+C Compiler: Apple clang version 15.0.0 (clang-1500.1.0.2.5)
+Go: go version go1.21.6 darwin/arm64
+Python: Python 3.12.2
+Ruby: ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin20]
+Shell: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin23)

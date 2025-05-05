@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slice Benchmark Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .plot-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .plot-container img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin: 40px 0;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .highlight {
+            background-color: #ffffcc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Slice Benchmark Report</h1>
+        <p>Generated on 2025-05-05 04:54:08</p>
+        
+        <div class="section">
+            <h2>System Information</h2>
+            <table>
+                <tr><th>Property</th><th>Value</th></tr>
+                <tr><td>OS</td><td>Darwin</td></tr>
+                <tr><td>OS Version</td><td>23.5.0</td></tr>
+                <tr><td>Architecture</td><td>arm64</td></tr>
+                <tr><td>Python Version</td><td>3.12.2</td></tr>
+                <tr><td>Date</td><td>2025-05-05 04:54:08</td></tr>
+                <tr><td>CPU</td><td>Apple M1</td></tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>Executive Summary</h2>
+            <p>This benchmark report compares different implementations of the 'slice' utility, with a focus on comparing the C implementations (slice1.c, slice2.c, and slice3.c).</p>
+        
+            <h3>C Implementation Comparison</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Fastest Implementation</th>
+                    <th>Avg. Time (s)</th>
+                    <th>Throughput (MB/s)</th>
+                </tr>
+            
+                <tr>
+                    <td>full_file</td>
+                    <td><strong>C-slice3</strong></td>
+                    <td>0.006108</td>
+                    <td>3884.64</td>
+                </tr>
+                
+                <tr>
+                    <td>large_chunk</td>
+                    <td><strong>C-slice3</strong></td>
+                    <td>0.004951</td>
+                    <td>4039.91</td>
+                </tr>
+                
+                <tr>
+                    <td>small_start</td>
+                    <td><strong>C-slice3</strong></td>
+                    <td>0.003196</td>
+                    <td>313.11</td>
+                </tr>
+                </table>
+        </div>
+        
+        <div class="section">
+            <h2>Benchmark Visualizations</h2>
+        
+            <div class="plot-container">
+                <h3>C Implementation Full File</h3>
+                <img src="plots/c_implementation_full_file.png" alt="C Implementation Full File">
+            </div>
+            
+            <div class="plot-container">
+                <h3>C Implementation Large Chunk</h3>
+                <img src="plots/c_implementation_large_chunk.png" alt="C Implementation Large Chunk">
+            </div>
+            
+            <div class="plot-container">
+                <h3>C Implementation Small Start</h3>
+                <img src="plots/c_implementation_small_start.png" alt="C Implementation Small Start">
+            </div>
+            
+            <div class="plot-container">
+                <h3>Small Slice Performance</h3>
+                <img src="plots/small_slice_performance.png" alt="Small Slice Performance">
+            </div>
+            
+            <div class="plot-container">
+                <h3>Throughput Comparison</h3>
+                <img src="plots/throughput_comparison.png" alt="Throughput Comparison">
+            </div>
+            
+            <div class="plot-container">
+                <h3>Time By File Size</h3>
+                <img src="plots/time_by_file_size.png" alt="Time By File Size">
+            </div>
+            
+        </div>
+        
+        <div class="section">
+            <h2>C Implementation Details</h2>
+            <p>The benchmark compares three C implementations:</p>
+            <ul>
+                <li><strong>slice1.c</strong>: Basic implementation using low-level system calls and chunked reading.</li>
+                <li><strong>slice2.c</strong>: More robust implementation with improved error handling and safety features, but allocates the entire buffer at once.</li>
+                <li><strong>slice3.c</strong>: Enhanced implementation that combines the performance advantages of slice1.c with the safety features of slice2.c, using dynamic chunk sizing based on file size.</li>
+            </ul>
+        
+                <h3>Scenario: full_file</h3>
+                <table>
+                    <tr>
+                        <th>File Size (MB)</th>
+                <th>C-slice1 (s)</th><th>C-slice2 (s)</th><th>C-slice3 (s)</th>
+                    </tr>
+                <tr><td>1</td><td>0.007074</td><td class='highlight'><strong>0.004507</strong></td><td>0.004864</td></tr>
+<tr><td>5</td><td>0.009209</td><td>0.003978</td><td class='highlight'><strong>0.003536</strong></td></tr>
+<tr><td>10</td><td>0.017107</td><td>0.004834</td><td class='highlight'><strong>0.004066</strong></td></tr>
+<tr><td>20</td><td>0.041724</td><td>0.006553</td><td class='highlight'><strong>0.005189</strong></td></tr>
+<tr><td>50</td><td>0.065837</td><td>0.010855</td><td class='highlight'><strong>0.007451</strong></td></tr>
+<tr><td>100</td><td>0.148108</td><td>0.018468</td><td class='highlight'><strong>0.011542</strong></td></tr>
+</table>
+
+                <h3>Scenario: small_start</h3>
+                <table>
+                    <tr>
+                        <th>File Size (MB)</th>
+                <th>C-slice1 (s)</th><th>C-slice2 (s)</th><th>C-slice3 (s)</th>
+                    </tr>
+                <tr><td>5</td><td>0.006980</td><td>0.003222</td><td class='highlight'><strong>0.003217</strong></td></tr>
+<tr><td>10</td><td>0.004742</td><td>0.003307</td><td class='highlight'><strong>0.003050</strong></td></tr>
+<tr><td>20</td><td>0.007412</td><td>0.003502</td><td class='highlight'><strong>0.003278</strong></td></tr>
+<tr><td>50</td><td>0.006365</td><td>0.003358</td><td class='highlight'><strong>0.003283</strong></td></tr>
+<tr><td>100</td><td>0.008634</td><td>0.003451</td><td class='highlight'><strong>0.003153</strong></td></tr>
+</table>
+
+                <h3>Scenario: large_chunk</h3>
+                <table>
+                    <tr>
+                        <th>File Size (MB)</th>
+                <th>C-slice1 (s)</th><th>C-slice2 (s)</th><th>C-slice3 (s)</th>
+                    </tr>
+                <tr><td>50</td><td>0.039727</td><td>0.006393</td><td class='highlight'><strong>0.005018</strong></td></tr>
+<tr><td>100</td><td>0.041164</td><td>0.006194</td><td class='highlight'><strong>0.004885</strong></td></tr>
+</table>
+
+        </div>
+        
+        <div class="section">
+            <h2>Raw Benchmark Data</h2>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>impl</th>
+      <th>scenario</th>
+      <th>file_size_MB</th>
+      <th>start_offset</th>
+      <th>slice_size</th>
+      <th>iterations</th>
+      <th>avg_time</th>
+      <th>min_time</th>
+      <th>max_time</th>
+      <th>stdev</th>
+      <th>throughput_MBps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C-slice1</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.007074</td>
+      <td>0.003532</td>
+      <td>0.020089</td>
+      <td>0.007278</td>
+      <td>141.361119</td>
+    </tr>
+    <tr>
+      <td>C-slice2</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.004507</td>
+      <td>0.003759</td>
+      <td>0.005731</td>
+      <td>0.000952</td>
+      <td>221.874541</td>
+    </tr>
+    <tr>
+      <td>C-slice3</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.004864</td>
+      <td>0.003314</td>
+      <td>0.009182</td>
+      <td>0.002492</td>
+      <td>205.589752</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.005895</td>
+      <td>0.004075</td>
+      <td>0.011783</td>
+      <td>0.003305</td>
+      <td>169.633343</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.024427</td>
+      <td>0.022679</td>
+      <td>0.029014</td>
+      <td>0.002755</td>
+      <td>40.937837</td>
+    </tr>
+    <tr>
+      <td>Ruby</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>0.049139</td>
+      <td>0.038352</td>
+      <td>0.087905</td>
+      <td>0.021682</td>
+      <td>20.350202</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>full_file</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1048564</td>
+      <td>5</td>
+      <td>1.135014</td>
+      <td>1.098187</td>
+      <td>1.201039</td>
+      <td>0.042428</td>
+      <td>0.881036</td>
+    </tr>
+    <tr>
+      <td>C-slice1</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.006980</td>
+      <td>0.002978</td>
+      <td>0.022489</td>
+      <td>0.008671</td>
+      <td>143.266476</td>
+    </tr>
+    <tr>
+      <td>C-slice2</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.003222</td>
+      <td>0.002937</td>
+      <td>0.003996</td>
+      <td>0.000445</td>
+      <td>310.366232</td>
+    </tr>
+    <tr>
+      <td>C-slice3</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.003217</td>
+      <td>0.002829</td>
+      <td>0.004143</td>
+      <td>0.000547</td>
+      <td>310.848617</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.003780</td>
+      <td>0.003594</td>
+      <td>0.004086</td>
+      <td>0.000214</td>
+      <td>264.550265</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.020993</td>
+      <td>0.020825</td>
+      <td>0.021089</td>
+      <td>0.000117</td>
+      <td>47.634926</td>
+    </tr>
+    <tr>
+      <td>Ruby</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>0.039839</td>
+      <td>0.036753</td>
+      <td>0.050483</td>
+      <td>0.005966</td>
+      <td>25.101032</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>small_start</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1048576</td>
+      <td>5</td>
+      <td>1.099666</td>
+      <td>1.086396</td>
+      <td>1.109370</td>
+      <td>0.009182</td>
+      <td>0.909367</td>
+    </tr>
+    <tr>
+      <td>C-slice1</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.009209</td>
+      <td>0.004151</td>
+      <td>0.029244</td>
+      <td>0.011199</td>
+      <td>542.945460</td>
+    </tr>
+    <tr>
+      <td>C-slice2</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.003978</td>
+      <td>0.003814</td>
+      <td>0.004062</td>
+      <td>0.000099</td>
+      <td>1256.909186</td>
+    </tr>
+    <tr>
+      <td>C-slice3</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.003536</td>
+      <td>0.003377</td>
+      <td>0.003687</td>
+      <td>0.000136</td>
+      <td>1414.022834</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.004865</td>
+      <td>0.004754</td>
+      <td>0.005045</td>
+      <td>0.000112</td>
+      <td>1027.746093</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.021809</td>
+      <td>0.021639</td>
+      <td>0.021938</td>
+      <td>0.000122</td>
+      <td>229.262449</td>
+    </tr>
+    <tr>
+      <td>Ruby</td>
+      <td>full_file</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5242864</td>
+      <td>5</td>
+      <td>0.038637</td>
+      <td>0.037219</td>
+      <td>0.041942</td>
+      <td>0.001887</td>
+      <td>129.409238</td>
+    </tr>
+  </tbody>
+</table><p>Showing 20 rows out of 91 total. See the CSV file for complete data.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Conclusions</h2>
+            <p>Based on the benchmark results, we can draw the following conclusions:</p>
+            <ul>
+        <li>slice3.c is on average <strong>13.6%</strong> faster than slice2.c across all tests.</li>
+<li>The largest improvement was seen in the <strong>full_file</strong> scenario with <strong>100MB</strong> files, where slice3.c was <strong>37.5%</strong> faster.</li>
+<li>slice3.c outperformed slice1.c in <strong>13</strong> out of <strong>13</strong> test cases (100.0%).</li>
+
+                <li>The dynamic chunk sizing approach in slice3.c successfully balances performance and memory usage.</li>
+                <li>For small files, the performance difference between implementations is minimal.</li>
+                <li>For larger files, the benefits of slice3.c become more pronounced.</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <p><em>Report generated automatically by slice/bench/generate_report.py</em></p>
+        </div>
+    </div>
+</body>
+</html>
