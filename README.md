@@ -92,7 +92,8 @@ Be aware that:
 - The generated benchmark input files are about 160 Mb in size. They are in ./bench/sample_inputs,  you may want to delete them after running the benchmarks.
 
 If you don't have the time and inclination to run the benchmarks yourself, I included a set of results running on a Macbook Pro M1 (the original, late 2020 model). You can see them here:
-https://github.com/ha1tch/slice/tree/main/bench/results
+¡[Benchmarks report captured on 2025-05-05](https://ha1tch.github.io/slice/benchmark_report.html)
+
 
 Some highlights from the aforementioned benchmark results:
 ### Time vs. File Size
